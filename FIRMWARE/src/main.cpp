@@ -31,7 +31,7 @@ void setup(void) {
 void loop() {
   float readings[5];
   // here we take the average of 5 readings to smooth out the data.
-  
+
   for (int i=0;i<5;i++){
     readings[i] = ohmMeter();
   }
@@ -44,6 +44,11 @@ void loop() {
   Serial.println(average);
  
 }
+
+
+
+
+
 
 float ohmMeter(){
   uint16_t volt_image = analogRead(A1) + 1;
