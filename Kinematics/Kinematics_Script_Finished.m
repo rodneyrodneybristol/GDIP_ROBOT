@@ -13,13 +13,13 @@ b = 50;
 alpha = a+5;
 beta = b + 176;
 
-%% Generating coordinates for box/grid
+%% NOT NEEDED Generating coordinates for box/grid
 Box_BLHS = [a , b] % box bottom left hand side
 Box_BRHS = [a+240, b]
 Box_TLHS = [a , b+340]
 Box_TRHS = [a+240, b+340]
 
-%% Generating coordinates for individual boxes/trays
+%% Not needed in code Generating coordinates for individual boxes/trays
 %taking alpha and beta as the reference point
 % itl = individual tray length
 % itw = individual tray width
@@ -75,7 +75,8 @@ M_T11 = [(T11(1)+T11(5))/2,(T11(3)+T11(7))/2]
 M_T12 = [(T12(1)+T12(5))/2,(T12(3)+T12(7))/2]
 M_T_EX_1 = [(T_EX_1(1)+T_EX_1(5))/2,(T_EX_1(3)+T_EX_1(7))/2]
 M_T_EX_2 = [(T_EX_2(1)+T_EX_2(5))/2,(T_EX_2(3)+T_EX_2(7))/2]
-%% finding the length between base and midpoint of the tray
+
+%% NOT NEEDED IN CODE finding the length between base and midpoint of the tray
 
 L1 = sqrt(M_T1(1)^2 + M_T1(2)^2)
 L2 = sqrt(M_T2(1)^2 + M_T2(2)^2)
@@ -94,7 +95,7 @@ L_EX_2 = sqrt(M_T_EX_2(1)^2 + M_T_EX_2(2)^2)
 T_L = [L1,L2,L3,L4;L5,L6,L7,L8;L9,L10,L11,L12] % putting all of them into a table
 
 
-%% Finding the angle between base and midpoint of tray
+%% WE NEED THIS Finding the angle between base and midpoint of tray
 
 theta_1_1 = atand(M_T1(2)/M_T1(1)) % in degrees
 theta_1_2 = atand(M_T2(2)/M_T2(1))
@@ -128,6 +129,7 @@ d3 = 85.725; % wrist to gripper length
 
 h = sqrt(d2^2-(d1-d3)^2)
 theta_3 = asind(h/d2) % if the distance to reach is greater than h, theta 2 will be set to this value
+
 %% theta 2 calcs
 % if L is less than h, theta 2 will be 0, otherwise theta 3 will be
 % constant and theta 2 will be determined
