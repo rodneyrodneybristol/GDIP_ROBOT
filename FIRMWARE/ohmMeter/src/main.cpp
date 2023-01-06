@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 
 ///Arduino autoranging ohmmeter with electromagnet
 
@@ -8,7 +9,7 @@
 #define CH2  10
 #define CH3  9
 #define CH4  8
- 
+#define ftl(x) ((x) >= 0 ? (long)((x) + 0.5) : (long)((x)-0.5))
 // variables
 byte ch_number;
 uint32_t res;
@@ -82,25 +83,40 @@ void setup(void) {
 }
 
 
-void electroMagnet(){
-  digitalWrite(2, LOW); 
-  digitalWrite(3, HIGH);
-  digitalWrite(4, HIGH);
-  Serial.print("MAGNET ON");
-  Serial.println();
-  delay(10000);
-  digitalWrite(2, LOW); 
-  digitalWrite(3, HIGH);
-  digitalWrite(4, LOW);
-  Serial.print("MAGNET OFF");
-  Serial.println();
-  delay(1000);
+void electroMagnet(int onOff){
+  if (onOff==1){
+    digitalWrite(2, LOW); 
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    //Serial.print("MAGNET ON");
+    //Serial.println();
+  }
+  if (onOff==0){
+    digitalWrite(2, LOW); 
+    digitalWrite(3, HIGH);
+    digitalWrite(4, LOW);
+    //Serial.print("MAGNET OFF");
+    //Serial.println();
+  }
+  
 
 }
 
-// main loop
-void loop() {
-  float resistorReads[5],sum=0;
+String listen_for_serial()
+{
+  String message;
+  if (Serial.available() > 0)
+  {
+    message = Serial.readString();
+
+    return message;
+  }
+  return "";
+}
+
+void ohmMeter(){
+  while(1){
+        float resistorReads[5],sum=0;
   
   // loop to find average of 5 readings
   for (int i=0;i<5;i++){
@@ -111,14 +127,14 @@ void loop() {
       ch_number++;
       ch_select(ch_number);
       delay(50);
-      return;
+      break;
     }
   
     if(volt_image <= 90 && ch_number > 0) {
       ch_number--;
       ch_select(ch_number);
       delay(50);
-      return;
+      break;
     }
     float value;
     if(volt_image < 900) {
@@ -126,7 +142,6 @@ void loop() {
       
       
     }
-  
     else
       value=0;
     if (value!=0){
@@ -134,20 +149,38 @@ void loop() {
         sum += resistorReads[i];
           //  for debugging purpose
           if (i==0){
-            Serial.print("Reading");
+            //Serial.print("Reading");
           }
-        Serial.print(".");
+        //Serial.print(".");
     }
 
     delay(500);   // wait some time
   }
   
   if (sum>0){
-    Serial.print("AVERAGE = ");
-    Serial.println(sum / 5);
-    Serial.println();
-    electroMagnet();
+    //Serial.print("AVERAGE = ");
+    Serial.println(ftl(sum / 5));
+    //Serial.println();
+    electroMagnet(1);
+    break;
   }
+      }
+}
+// main loop
+void loop() {
+  String checker = listen_for_serial();
+    if (checker =="TEST\n")
+    {
+      ohmMeter();
+    }
+    if (checker =="MOF\n")
+    {
+      electroMagnet(0);
+    }
+    if (checker =="MON\n")
+    {
+      electroMagnet(1);
+    }
  
 }
 

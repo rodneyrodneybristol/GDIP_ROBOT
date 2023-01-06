@@ -96,8 +96,11 @@ char* getArmCode( float x, float y, float z, float grip_angle_d )
     float elb_servopulse = 1500.0 -  (( elb_angle_d - 90.0 ) * 6.6 );
     float wri_servopulse = 1500 - ( wri_angle_d  * 11.1 );
     //Set servo pulses
+    //create string for output
     char *output;
+    //initialise the string
+    output = (char*)malloc(100);
     //Added some offsets here, not sure if they are correct, they seem to work though
-    sprintf(output, "#0P%u#1P%u#2P%u#3P%uT100\r", ftl(1500-bas_servopulse+500), ftl(shl_servopulse), ftl(elb_servopulse), ftl(wri_servopulse+400));
+    sprintf(output, "#0P%ld#1P%uld#2P%uld#3P%uldT1000\r", ftl(1500-bas_servopulse+500), ftl(shl_servopulse), ftl(elb_servopulse), ftl(wri_servopulse+400));
     return output;
 }
