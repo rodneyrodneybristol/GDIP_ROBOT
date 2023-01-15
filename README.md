@@ -22,6 +22,6 @@ to 3D print the conveoyr belt, simply load the provided STLs in to any chopper s
 <br><br>
 Calibration offset for the Robot can be adjusted in the 
 ```
-startAndCalibrateArm()
-;``` function within the mobo/mainboard main.cpp file. These will need to be set once when loading the system, in case any servos have serious offsets. This allows for more precise movements of the arm.
+startAndCalibrateArm();
+``` function within the mobo/mainboard main.cpp file. These will need to be set once when loading the system, in case any servos have serious offsets. This allows for more precise movements of the arm.
 <br><br>
