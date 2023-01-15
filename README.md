@@ -4,7 +4,9 @@
 <br>
 To install:
 <br>
-```git clone https://github.com/rodneyrodneybristol/GDIP_ROBOT```
+```
+git clone https://github.com/rodneyrodneybristol/GDIP_ROBOT
+```
 <br>
 or download the .zip repository directly
 <br><br>
@@ -18,5 +20,8 @@ to 3D print the conveoyr belt, simply load the provided STLs in to any chopper s
 <br><br>
 2 x 5V supplies, with at least 2A each are required  to run this system, one which handles the mobo/servos/ohm meter etc and another for powering the conveoyrs NEMA17 stepper motor. 
 <br><br>
-Calibration offset for the Robot can be adjusted in the ``` startAndCalibrateArm();``` function within the mobo/mainboard main.cpp file. These will need to be set once when loading the system, in case any servos have serious offsets. This allows for more precise movements of the arm.
+Calibration offset for the Robot can be adjusted in the 
+```
+startAndCalibrateArm()
+;``` function within the mobo/mainboard main.cpp file. These will need to be set once when loading the system, in case any servos have serious offsets. This allows for more precise movements of the arm.
 <br><br>
