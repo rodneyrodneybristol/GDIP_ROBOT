@@ -1,4 +1,4 @@
-# GDIP_ROBOT
+# UWE GDIP 2022, GROUP 7D RESISTOR SORTING ROBOT
 <img src="https://raw.githubusercontent.com/rodneyrodneybristol/GDIP_ROBOT/main/Media/Final_design_with_board.png?token=GHSAT0AAAAAAB3WTU4EJ6VEMH2D4K6PH4QWY6D334A">
 <b>How to assemble and run</b>
 <br>
